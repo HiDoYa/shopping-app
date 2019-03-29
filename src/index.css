@@ -1,0 +1,18 @@
+.cartmenu {
+    height: 100vh;
+    width: 20em;
+    right: -20em;
+    background-color: gray;
+    position: fixed;
+    z-index: 1060;
+}
+
+.seecartmenu {
+    position: fixed;
+    right: 0em;
+    width: 5em;
+}
+
+img {
+    width: inherit;
+}

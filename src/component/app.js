@@ -20,8 +20,12 @@ class App extends React.Component {
 
 class CartMenuBtn extends React.Component {
     render() {
+        let classes = "btn btn-primary seecartmenu";
+        if (this.props.showing) {
+            classes += " seecartmenuopen";
+        }
         return (
-            <button class="btn btn-primary seecartmenu" onClick={() => this.props.onClick()}>
+            <button class={classes} onClick={() => this.props.onClick()}>
                 See cart
             </button>
         );
@@ -35,11 +39,25 @@ class CartMenu extends React.Component {
             showing: false,
         }
     }
+
+    openMenu() {
+            this.setState({
+            showing: !this.state.showing,
+        })
+    }
+
     render() {
+        let classes = "shopping-cart cartmenu";
+        if (this.state.showing) {
+            classes += " cartmenuopen";
+        }
         return (
             <React.Fragment>
-                <CartMenuBtn />
-                <div class="shopping-cart cartmenu">
+                <CartMenuBtn
+                    showing={this.state.showing}
+                    onClick={() => this.openMenu()}
+                />
+                <div class={classes}>
                     <div class="col-md-3">CartMenu</div>
                 </div>
             </React.Fragment>

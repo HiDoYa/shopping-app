@@ -23,7 +23,14 @@
 
 .seecartmenuopen {
     right: 20em;
-    transition: right 0.2s;
+    transition: right 0.2s !important;
+}
+
+.highlight {
+    border-style: solid;
+    border-width: 2px;
+    border-color: gray;
+    border-radius: 1px;
 }
 
 img {

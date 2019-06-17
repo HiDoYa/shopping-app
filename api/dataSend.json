@@ -1,0 +1,15 @@
+{
+    "items": [
+        {
+            "name": "Lemon",
+            "price": 50,
+            "image-file": "lemon.jpeg"
+        }, 
+        {
+
+            "name": "Orange",
+            "price": 5,
+            "image-file": "orange.jpeg"
+        }
+    ]
+}

@@ -2,24 +2,44 @@ import React from 'react'
 const placeholder = require('./placeholder.jpg');
 
 class ItemsGrid extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
     render() {
+
+        const items = [];
+
+        // If there was a response
+        if (this.props.apiResponse !== "") {
+            let dataJson = JSON.parse(this.props.apiResponse);
+            let numItems = dataJson["items"].length;
+            let numRows = numItems / 3;
+            for (let i = 0; i < numRows; i++) {
+                const currentRow = [];
+                let currentItem = 3 * i;
+
+                for (let j = 0; j < 3; j++) {
+                    if (dataJson["items"][currentItem]) {
+                        currentRow.push(
+                            <Item 
+                                name={dataJson["items"][currentItem]["name"]}
+                                price={dataJson["items"][currentItem]["price"].toFixed(2)}
+                                category={dataJson["items"][currentItem]["category"]}
+                                index={currentItem}
+                                addToCart={(index) => this.props.addToCart(index)}
+                            />);
+                    }
+                    currentItem++;
+                }
+
+                items.push(<div className="row">{currentRow}</div>);
+            }
+        }
+
         return (
-            <div class="col-md-9">
-                <div class="row">
-                    <Item addToCart={() => this.props.addToCart()}/>
-                    <Item addToCart={() => this.props.addToCart()}/>
-                    <Item addToCart={() => this.props.addToCart()}/>
-                </div>
-                <div class="row">
-                    <Item addToCart={() => this.props.addToCart()}/>
-                    <Item addToCart={() => this.props.addToCart()}/>
-                    <Item addToCart={() => this.props.addToCart()}/>
-                </div>
-                <div class="row">
-                    <Item addToCart={() => this.props.addToCart()}/>
-                    <Item addToCart={() => this.props.addToCart()}/>
-                    <Item addToCart={() => this.props.addToCart()}/>
-                </div>
+            <div className="col-md-9">
+                {items}
             </div>
         );   
     }
@@ -46,20 +66,23 @@ class Item extends React.Component {
     }
 
     render() {
-        let overallClass = "col-md-4 mt-2 mb-2 text-center"
+        let overallClass = "col-md-4 mt-2 mb-2 text-center item"
         if (this.state.highlight) {
             overallClass += " highlight"
         }
 
+        // TODO : Replace placeholder with image this.props.image
         return (
             <div 
-                class={overallClass} 
-                onClick={() => this.props.addToCart()} 
+                className={overallClass} 
+                onClick={() => this.props.addToCart(this.props.index)} 
                 onMouseOver={() => this.mouseOver()} 
                 onMouseOut={() => this.mouseOut()}
             >
-                <img class="mt-3 mb-3" src={placeholder}></img>
-                <button class="btn btn-primary mt-3 mb-3">Add to Cart</button>
+                <h3>{this.props.name}</h3>
+                <img className="mt-3 mb-3" src={placeholder}></img>
+                <h5>Price: ${this.props.price}</h5>
+                <button className="btn btn-success mt-3 mb-3">Add to Cart</button>
             </div>
         );
     }

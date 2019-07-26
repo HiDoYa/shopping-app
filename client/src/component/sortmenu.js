@@ -1,24 +1,19 @@
 import React from 'react'
 
 class SortMenu extends React.Component {
+    // TODO Add categories based on all the categories that currently exist
     render() {
         return (
-            <div class="col-md-3">
-                <div class="row">
+            <div className="col-md-3">
+                <div className="row">
                     <h5>Filter:</h5>
                 </div>
-                <div class="row">
-                    <SortElements value="Vegetables"/>
-                    <SortElements value="Fruits"/>
-                </div>
-                <div class="row">
-                    <SortElements value="Meat"/>
-                    <SortElements value="Fish"/>
-                    <SortElements value="Dairy"/>
-                </div>
-                <div class="row">
-                    <SortElements value="Snacks"/>
-                </div>
+                <SortElements value="Vegetables"/>
+                <SortElements value="Fruits"/>
+                <SortElements value="Meat"/>
+                <SortElements value="Fish"/>
+                <SortElements value="Dairy"/>
+                <SortElements value="Snacks"/>
             </div>
         );   
     }
@@ -27,7 +22,7 @@ class SortMenu extends React.Component {
 class SortElements extends React.Component {
     render() {
         return (
-            <button class="btn btn-outline-primary m-1">{this.props.value}</button>
+            <button className="btn btn-outline-success m-1">{this.props.value}</button>
         );
     }
 }

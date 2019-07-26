@@ -1,8 +1,27 @@
+:root {
+    --green-1: #597C2B;
+    --green-2: #668D2E;
+    --green-3: #80A142;
+    --green-4: #91B247;
+    --green-5: #D2E459;
+
+    --light-yellow: #ECDF60;
+    --dark-yellow: #ECCA11;
+    --background1: #EBEDCF;
+    --background2: rgb(255, 247, 174);
+}
+
+#root {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: rgb(232, 253, 214);
+    color: rgb(70, 70, 70);
+}
+
 .cartmenu {
     height: 100vh;
     width: 20em;
     right: -20em;
-    background-color: gray;
+    background-color: var(--green-3);
     position: fixed;
     z-index: 1060;
     -webkit-transition: right 0.2s;
@@ -14,15 +33,18 @@
 }
 
 .seecartmenu {
+    z-index: 1060;
     position: fixed;
-    right: 0em;
-    width: 5em;
+    right: -0.2em;
+    font-size: 15em;
+    width: 6em;
+    height: 4em;
     -webkit-transition: right 0.2s;
     transition: right 0.2s;
 }
 
 .seecartmenuopen {
-    right: 20em;
+    right: 19.8em;
     transition: right 0.2s !important;
 }
 
@@ -33,6 +55,32 @@
     border-radius: 1px;
 }
 
+.item {
+    background-color: var(--tile-col);
+}
+
 img {
     width: inherit;
+}
+
+.cartmenu-title {
+    text-align: center;
+}
+
+.cartmenu-element {
+    background-color: var(--green-5);
+    color: var(--green-1);
+    border-style: solid;
+    border-width: 0.1em;
+    border-radius: 0.5em;
+    border-color: white;
+    text-align: center;
+}
+
+.cartmenu-element:hover {
+    background-color: var(--green-4);
+}
+
+.cartmenu-title {
+    color: rgb(189, 255, 187);
 }

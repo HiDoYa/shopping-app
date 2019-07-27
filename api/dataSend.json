@@ -2,31 +2,31 @@
     "items": [
         {
             "name": "Lemon",
-            "category": "fruit",
+            "category": "Fruit",
             "price": 50,
             "image-file": "lemon.jpeg"
         }, 
         {
             "name": "Broccoli",
-            "category": "vegetable",
+            "category": "Vegetable",
             "price": 5,
             "image-file": "broccoli.jpeg"
         },
         {
             "name": "Banana",
-            "category": "fruit",
+            "category": "Fruit",
             "price": 100,
             "image-file": "banana.jpeg"
         },
         {
             "name": "Carrot",
-            "category": "vegetable",
+            "category": "Vegetable",
             "price": 3,
             "image-file": "carrot.jpeg"
         }, 
         {
             "name": "Watermelon",
-            "category": "fruit",
+            "category": "Fruit",
             "price": 1.50,
             "image-file": "watermelon.jpeg"
         }

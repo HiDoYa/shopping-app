@@ -9,12 +9,14 @@ class App extends React.Component {
         this.state = {
             apiResponse: "",
             itemsAdded: [],
+            categories: [],
+            filter: [],
         }
     }
 
     addToCart(index) {
         // Check if apiResponse not loaded yet
-        if (this.state.apiResponse == "") {
+        if (this.state.apiResponse === "") {
             return;
         }
 
@@ -32,7 +34,7 @@ class App extends React.Component {
 
     removeFromCart(index) {
         // Check if apiResponse not loaded yet
-        if (this.state.apiResponse == "") {
+        if (this.state.apiResponse === "") {
             return;
         }
         let newState = [...this.state.itemsAdded];
@@ -42,12 +44,32 @@ class App extends React.Component {
         this.setState({itemsAdded: newState});
     }
 
+    // Set filter for one of the categories (selected by index)
+    setFilter(index) {
+
+    }
+
+    // Reset filter
+    resetFilter() {
+
+    }
+
     componentDidMount() {
         // Calls API, gets response, converts to text, store as state
         // Note, json is passed into items to initialize them
         fetch("http://localhost:9000/")
         .then(res => res.text())
-        .then(jsonString => this.setState({ apiResponse: jsonString }));
+        .then(jsonString => {
+            let categoriesArr = [];
+            // Gets item categories for sortMenu
+            Array.from(JSON.parse(jsonString)["items"]).map((item, index) => {
+                let currentCategory = item["category"];
+                if (!categoriesArr.find((element) => element===currentCategory)) {
+                    categoriesArr.push(currentCategory);
+                }
+            });
+            this.setState({ apiResponse: jsonString, categories: categoriesArr });
+        })
     }
 
     render() {
@@ -61,7 +83,12 @@ class App extends React.Component {
                 <div className="container">
                     <h3 className="display-4 text-center pt-4 mb-4">HiDoYa's Market</h3>
                     <div className="row">
-                        <SortMenu />
+                        <SortMenu 
+                            categories={this.state.categories}
+                            filter={this.state.filter}
+                            setFilter={(index) => this.setFilter(index)}
+                            resetFilter={() => this.resetFilter()}
+                        />
                         <ItemsGrid 
                             apiResponse={this.state.apiResponse}
                             addToCart={(index) => this.addToCart(index)}

@@ -15,6 +15,7 @@ class ItemsGrid extends React.Component {
             let dataJson = JSON.parse(this.props.apiResponse);
             let numItems = dataJson["items"].length;
             let numRows = numItems / 3;
+            // Create row with 3 "Items"
             for (let i = 0; i < numRows; i++) {
                 const currentRow = [];
                 let currentItem = 3 * i;
@@ -26,6 +27,7 @@ class ItemsGrid extends React.Component {
                                 name={dataJson["items"][currentItem]["name"]}
                                 price={dataJson["items"][currentItem]["price"].toFixed(2)}
                                 category={dataJson["items"][currentItem]["category"]}
+                                key={currentItem}
                                 index={currentItem}
                                 addToCart={(index) => this.props.addToCart(index)}
                             />);
@@ -33,7 +35,7 @@ class ItemsGrid extends React.Component {
                     currentItem++;
                 }
 
-                items.push(<div className="row">{currentRow}</div>);
+                items.push(<div className="row" key={currentItem}>{currentRow}</div>);
             }
         }
 
@@ -66,7 +68,7 @@ class Item extends React.Component {
     }
 
     render() {
-        let overallClass = "col-md-4 mt-2 mb-2 text-center item"
+        let overallClass = "col-md-4 mt-2 mb-2 text-center"
         if (this.state.highlight) {
             overallClass += " highlight"
         }

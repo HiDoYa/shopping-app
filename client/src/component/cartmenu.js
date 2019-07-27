@@ -1,4 +1,5 @@
 import React from 'react'
+const placeholder = require('./placeholder.jpg');
 
 class CartMenu extends React.Component {
     constructor(props) {
@@ -16,26 +17,6 @@ class CartMenu extends React.Component {
 
     render() {
         let classes = "shopping-cart cartmenu";
-        const elements = [];
-
-        if (this.props.apiResponse !== "") {
-            let dataJson = JSON.parse(this.props.apiResponse);
-            
-            for (let i = 0; i < this.props.itemsAdded.length; i++) {
-                let currentIdx = this.props.itemsAdded[i];
-                elements.push(
-                    <CartMenuElement
-                        name={dataJson["items"][currentIdx]["name"]}
-                        price={dataJson["items"][currentIdx]["price"]}
-                        category={dataJson["items"][currentIdx]["category"]}
-                        index={currentIdx}
-                        removeFromCart={(index) => this.props.removeFromCart(index)}
-                        quantity={1}
-                    />
-                );
-            }
-        }
-
         if (this.state.showing) {
             classes += " cartmenuopen";
         }
@@ -47,7 +28,19 @@ class CartMenu extends React.Component {
                 />
                 <div className={classes}>
                     <h3 className="cartmenu-title mt-3">Shopping Cart</h3>
-                    {elements}
+                    {this.props.itemsAdded.map((itemIndex, loopIndex) => {
+                        let dataJson = JSON.parse(this.props.apiResponse);
+                        return (
+                            <CartMenuElement
+                                name={dataJson["items"][itemIndex]["name"]}
+                                price={dataJson["items"][itemIndex]["price"]}
+                                category={dataJson["items"][itemIndex]["category"]}
+                                key={itemIndex}
+                                index={itemIndex}
+                                removeFromCart={(index) => this.props.removeFromCart(index)}
+                                quantity={1}
+                            />)
+                    })}
                 </div>
             </React.Fragment>
         );   
@@ -71,6 +64,17 @@ class CartMenuBtn extends React.Component {
 class CartMenuElement extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            numberBuy: 1,
+        }
+    }
+
+    decreaseNumber() {
+        this.setState({numberBuy: this.state.numberBuy === 1 ? 1 : this.state.numberBuy - 1})
+    }
+    
+    increaseNumber() {
+        this.setState({numberBuy: this.state.numberBuy + 1})
     }
 
     render() {
@@ -78,6 +82,11 @@ class CartMenuElement extends React.Component {
             <div className="m-3 cartmenu-element row">
                 <div className="col-md-6">
                     <h5 className="mt-2">{this.props.name}</h5>
+                    <div className="row ml-1">
+                        <button className="m-1 col-md-3" onClick={() => this.decreaseNumber()}>-</button>
+                        <p className="col-md-3">{this.state.numberBuy}</p>
+                        <button className="m-1 col-md-3" onClick={() => this.increaseNumber()}>+</button>
+                    </div>
                     <button 
                         className="btn btn-primary mt-3 mb-3"
                         onClick={() => this.props.removeFromCart(this.props.index)} 
@@ -86,7 +95,8 @@ class CartMenuElement extends React.Component {
                     </button>
                 </div>
                 <div className="col-md-6">
-                    <image>test</image>
+                    <img className="m-2" src={placeholder}></img>
+                    <p>Cost: ${this.state.numberBuy * this.props.price}</p> 
                 </div>
             </div>
         );

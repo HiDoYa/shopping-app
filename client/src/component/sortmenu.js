@@ -1,6 +1,12 @@
 import React from 'react'
 
 class SortMenu extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            showing: false,
+        }
+    }
     // TODO Add categories based on all the categories that currently exist
     render() {
         return (
@@ -8,12 +14,13 @@ class SortMenu extends React.Component {
                 <div className="row">
                     <h5>Filter:</h5>
                 </div>
-                <SortElements value="Vegetables"/>
-                <SortElements value="Fruits"/>
-                <SortElements value="Meat"/>
-                <SortElements value="Fish"/>
-                <SortElements value="Dairy"/>
-                <SortElements value="Snacks"/>
+                {this.props.categories.map((category) => {
+                    return (
+                        <SortElements
+                            value={category}
+                        />
+                    )
+                })}
             </div>
         );   
     }

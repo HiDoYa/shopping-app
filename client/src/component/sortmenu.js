@@ -18,6 +18,7 @@ class SortMenu extends React.Component {
                     return (
                         <SortElements
                             value={category}
+                            key={category}
                         />
                     )
                 })}

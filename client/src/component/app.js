@@ -62,11 +62,12 @@ class App extends React.Component {
         .then(jsonString => {
             let categoriesArr = [];
             // Gets item categories for sortMenu
-            Array.from(JSON.parse(jsonString)["items"]).map((item, index) => {
+            Array.from(JSON.parse(jsonString)["items"]).map((item) => {
                 let currentCategory = item["category"];
                 if (!categoriesArr.find((element) => element===currentCategory)) {
                     categoriesArr.push(currentCategory);
                 }
+                return null;
             });
             this.setState({ apiResponse: jsonString, categories: categoriesArr });
         })

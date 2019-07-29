@@ -95,7 +95,7 @@ class CartMenuElement extends React.Component {
                     </button>
                 </div>
                 <div className="col-md-6">
-                    <img className="m-2" src={placeholder}></img>
+                    <img className="m-2" src={placeholder} alt="Cart Menu Element"></img>
                     <p>Cost: ${this.state.numberBuy * this.props.price}</p> 
                 </div>
             </div>

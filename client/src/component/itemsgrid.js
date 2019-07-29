@@ -4,10 +4,11 @@ const placeholder = require('./placeholder.jpg');
 class ItemsGrid extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+        }
     }
 
     render() {
-
         const items = [];
 
         // If there was a response
@@ -82,7 +83,7 @@ class Item extends React.Component {
                 onMouseOut={() => this.mouseOut()}
             >
                 <h3>{this.props.name}</h3>
-                <img className="mt-3 mb-3" src={placeholder}></img>
+                <img className="mt-3 mb-3" src={placeholder} alt="Item"></img>
                 <h5>Price: ${this.props.price}</h5>
                 <button className="btn btn-success mt-3 mb-3">Add to Cart</button>
             </div>

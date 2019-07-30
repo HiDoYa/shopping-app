@@ -10,7 +10,7 @@ class App extends React.Component {
             apiResponse: "",
             itemsAdded: [],
             categories: [],
-            filter: [],
+            filter: "All",
         }
     }
 
@@ -44,14 +44,9 @@ class App extends React.Component {
         this.setState({itemsAdded: newState});
     }
 
-    // Set filter for one of the categories (selected by index)
-    setFilter(index) {
-
-    }
-
-    // Reset filter
-    resetFilter() {
-
+    // Set filter for one of the categories
+    setFilter(categoryName) {
+        this.setState({filter: categoryName});
     }
 
     componentDidMount() {
@@ -87,11 +82,11 @@ class App extends React.Component {
                         <SortMenu 
                             categories={this.state.categories}
                             filter={this.state.filter}
-                            setFilter={(index) => this.setFilter(index)}
-                            resetFilter={() => this.resetFilter()}
+                            setFilter={(categoryName) => this.setFilter(categoryName)}
                         />
                         <ItemsGrid 
                             apiResponse={this.state.apiResponse}
+                            filter={this.state.filter}
                             addToCart={(index) => this.addToCart(index)}
                         />
                     </div>

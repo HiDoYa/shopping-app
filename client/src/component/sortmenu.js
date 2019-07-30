@@ -14,14 +14,19 @@ class SortMenu extends React.Component {
                 <div className="row">
                     <h5>Filter:</h5>
                 </div>
-                {this.props.categories.map((category) => {
-                    return (
-                        <SortElements
-                            value={category}
-                            key={category}
-                        />
-                    )
-                })}
+                {this.props.categories.map((category) => 
+                    <SortElements
+                        value={category}
+                        key={category}
+                        setFilter={(categoryName) => this.props.setFilter(categoryName)}
+                    />
+                )}
+                <SortElements
+                    value="All"
+                    key="All"
+                    setFilter={(categoryName) => this.props.setFilter(categoryName)}
+                    All
+                />
             </div>
         );   
     }
@@ -30,7 +35,11 @@ class SortMenu extends React.Component {
 class SortElements extends React.Component {
     render() {
         return (
-            <button className="btn btn-outline-success m-1">{this.props.value}</button>
+            <button 
+            className="btn btn-outline-success m-1"
+            onClick={() => this.props.setFilter(this.props.value)}>
+                {this.props.value}
+            </button>
         );
     }
 }

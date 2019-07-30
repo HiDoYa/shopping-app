@@ -13,21 +13,36 @@ class ItemsGrid extends React.Component {
 
         // If there was a response
         if (this.props.apiResponse !== "") {
-            let dataJson = JSON.parse(this.props.apiResponse);
-            let numItems = dataJson["items"].length;
+            // Parse JSON
+            let dataJson = JSON.parse(this.props.apiResponse)["items"];
+
+            // Only show elements based on filter
+            dataJson = dataJson.map(currentItem => {
+                if (this.props.filter === "All") {
+                    return currentItem;
+                }
+                
+                if (currentItem["category"] === this.props.filter) {
+                    return currentItem;
+                }
+                return null;
+            });
+
+            let numItems = dataJson.length;
             let numRows = numItems / 3;
+
             // Create row with 3 "Items"
             for (let i = 0; i < numRows; i++) {
                 const currentRow = [];
                 let currentItem = 3 * i;
 
                 for (let j = 0; j < 3; j++) {
-                    if (dataJson["items"][currentItem]) {
+                    if (dataJson[currentItem]) {
                         currentRow.push(
                             <Item 
-                                name={dataJson["items"][currentItem]["name"]}
-                                price={dataJson["items"][currentItem]["price"].toFixed(2)}
-                                category={dataJson["items"][currentItem]["category"]}
+                                name={dataJson[currentItem]["name"]}
+                                price={dataJson[currentItem]["price"].toFixed(2)}
+                                category={dataJson[currentItem]["category"]}
                                 key={currentItem}
                                 index={currentItem}
                                 addToCart={(index) => this.props.addToCart(index)}

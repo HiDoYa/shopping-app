@@ -49,9 +49,9 @@ class CartMenu extends React.Component {
 
 class CartMenuBtn extends React.Component {
     render() {
-        let classes = "btn btn-success seecartmenu";
+        let classes = "btn btn-success cartmenubutton";
         if (this.props.showing) {
-            classes += " seecartmenuopen";
+            classes += " cartmenubuttonopen";
         }
         return (
             <button className={classes} onClick={() => this.props.onClick()}>

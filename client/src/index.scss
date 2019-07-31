@@ -1,0 +1,82 @@
+$background: rgb(20, 102, 78);
+$text: rgb(186, 201, 189);
+$cart-background: rgb(19, 65, 92);
+$cart-background-hover: rgb(84, 126, 122);
+$cart-text: rgb(112, 214, 197);
+$cart-text-hover: rgb(112, 214, 197);
+$cart-title: rgb(112, 214, 197);
+$item-border: gray;
+
+#root {
+    background-color: $background;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    min-height: 100vh;
+    color: $text;
+}
+
+.cartmenu {
+    background-color: $cart-background;
+    height: 100vh;
+    width: 20em;
+    right: -20em;
+    z-index: 1060;
+    position: fixed;
+    transition: right 0.2s;
+    -webkit-transition: right 0.2s;
+}
+
+.cartmenuopen {
+    right: 0em;
+}
+
+.cartmenubutton {
+    z-index: 1060;
+    position: fixed;
+    right: -0.2em;
+    font-size: 15em;
+    width: 6em;
+    height: 4em;
+    -webkit-transition: right 0.2s;
+    transition: right 0.2s;
+}
+
+.cartmenubuttonopen {
+    right: 19.8em;
+    transition: right 0.2s !important;
+}
+
+.highlight {
+    border-style: solid;
+    border-width: 2px;
+    border-color: $item-border;
+    border-radius: 1px;
+}
+
+img {
+    width: inherit;
+}
+
+.cartmenu-title {
+    text-align: center;
+}
+
+.cartmenu-element {
+    background-color: $cart-background;
+    color: $cart-text;
+    border-style: solid;
+    border-width: 0.1em;
+    border-radius: 0.5em;
+    border-color: $item-border;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+
+    &:hover {
+        background-color: $cart-background-hover;
+        color: $cart-text-hover;
+    }
+}
+
+.cartmenu-title {
+    color: $cart-title;
+}

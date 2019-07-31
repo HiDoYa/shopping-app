@@ -17,17 +17,10 @@ class ItemsGrid extends React.Component {
             let dataJson = JSON.parse(this.props.apiResponse)["items"];
 
             // Only show elements based on filter
-            dataJson = dataJson.map(currentItem => {
-                if (this.props.filter === "All") {
-                    return currentItem;
-                }
-                
-                if (currentItem["category"] === this.props.filter) {
-                    return currentItem;
-                }
-                return null;
-            });
-
+            dataJson = dataJson.filter(currentItem => 
+                this.props.filter === "All" || this.props.filter === currentItem["category"]
+            );
+            
             let numItems = dataJson.length;
             let numRows = numItems / 3;
 
@@ -98,7 +91,7 @@ class Item extends React.Component {
                 onMouseOut={() => this.mouseOut()}
             >
                 <h3>{this.props.name}</h3>
-                <img className="mt-3 mb-3" src={placeholder} alt="Item"></img>
+                <img className="mt-3 mb-3 slide-up" src={placeholder} alt="Item"></img>
                 <h5>Price: ${this.props.price}</h5>
                 <button className="btn btn-success mt-3 mb-3">Add to Cart</button>
             </div>

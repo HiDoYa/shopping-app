@@ -1,5 +1,4 @@
 import React from 'react'
-const placeholder = require('./placeholder.jpg');
 
 class CartMenu extends React.Component {
     constructor(props) {
@@ -49,7 +48,7 @@ class CartMenu extends React.Component {
 
 class CartMenuBtn extends React.Component {
     render() {
-        let classes = "btn btn-success cartmenubutton";
+        let classes = "btn btn-primary cartmenubutton";
         if (this.props.showing) {
             classes += " cartmenubuttonopen";
         }
@@ -87,15 +86,14 @@ class CartMenuElement extends React.Component {
                         <p className="col-md-3">{this.state.numberBuy}</p>
                         <button className="m-1 col-md-3" onClick={() => this.increaseNumber()}>+</button>
                     </div>
+                </div>
+                <div className="col-md-6">
                     <button 
                         className="btn btn-primary mt-3 mb-3"
                         onClick={() => this.props.removeFromCart(this.props.index)} 
                         >
                         Remove
                     </button>
-                </div>
-                <div className="col-md-6">
-                    <img className="m-2" src={placeholder} alt="Cart Menu Element"></img>
                     <p>Cost: ${this.state.numberBuy * this.props.price}</p> 
                 </div>
             </div>

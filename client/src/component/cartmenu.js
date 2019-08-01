@@ -1,17 +1,21 @@
-import React from 'react'
+import React from "react";
 
 class CartMenu extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            showing: false,
-        }
+            showing: false
+        };
     }
 
-    openMenu() {
+    clickMenuButton() {
         this.setState({
-            showing: !this.state.showing,
-        })
+            showing: !this.state.showing
+        });
+    }
+
+    calculatePrice() {
+        // TODO: Fix this
     }
 
     render() {
@@ -21,10 +25,7 @@ class CartMenu extends React.Component {
         }
         return (
             <React.Fragment>
-                <CartMenuBtn
-                    showing={this.state.showing}
-                    onClick={() => this.openMenu()}
-                />
+                <CartMenuBtn showing={this.state.showing} onClick={() => this.clickMenuButton()} />
                 <div className={classes}>
                     <h3 className="cartmenu-title mt-3">Shopping Cart</h3>
                     {this.props.itemsAdded.map((itemIndex, loopIndex) => {
@@ -36,13 +37,14 @@ class CartMenu extends React.Component {
                                 category={dataJson["items"][itemIndex]["category"]}
                                 key={itemIndex}
                                 index={itemIndex}
-                                removeFromCart={(index) => this.props.removeFromCart(index)}
+                                removeFromCart={index => this.props.removeFromCart(index)}
                                 quantity={1}
-                            />)
+                            />
+                        );
                     })}
                 </div>
             </React.Fragment>
-        );   
+        );
     }
 }
 
@@ -64,16 +66,18 @@ class CartMenuElement extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            numberBuy: 1,
-        }
+            numberBuy: 1
+        };
     }
 
     decreaseNumber() {
-        this.setState({numberBuy: this.state.numberBuy === 1 ? 1 : this.state.numberBuy - 1})
+        this.setState({
+            numberBuy: this.state.numberBuy === 1 ? 1 : this.state.numberBuy - 1
+        });
     }
-    
+
     increaseNumber() {
-        this.setState({numberBuy: this.state.numberBuy + 1})
+        this.setState({ numberBuy: this.state.numberBuy + 1 });
     }
 
     render() {
@@ -82,19 +86,20 @@ class CartMenuElement extends React.Component {
                 <div className="col-md-6">
                     <h5 className="mt-2">{this.props.name}</h5>
                     <div className="row ml-1">
-                        <button className="m-1 col-md-3" onClick={() => this.decreaseNumber()}>-</button>
+                        <button className="m-1 col-md-3" onClick={() => this.decreaseNumber()}>
+                            -
+                        </button>
                         <p className="col-md-3">{this.state.numberBuy}</p>
-                        <button className="m-1 col-md-3" onClick={() => this.increaseNumber()}>+</button>
+                        <button className="m-1 col-md-3" onClick={() => this.increaseNumber()}>
+                            +
+                        </button>
                     </div>
                 </div>
                 <div className="col-md-6">
-                    <button 
-                        className="btn btn-primary mt-3 mb-3"
-                        onClick={() => this.props.removeFromCart(this.props.index)} 
-                        >
+                    <button className="btn btn-primary mt-3 mb-3" onClick={() => this.props.removeFromCart(this.props.index)}>
                         Remove
                     </button>
-                    <p>Cost: ${this.state.numberBuy * this.props.price}</p> 
+                    <p>Cost: ${this.state.numberBuy * this.props.price}</p>
                 </div>
             </div>
         );

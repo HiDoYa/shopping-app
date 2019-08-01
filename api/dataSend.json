@@ -5,7 +5,7 @@
             "category": "Fruit",
             "price": 50,
             "image-file": "lemon.jpg"
-        }, 
+        },
         {
             "name": "Broccoli",
             "category": "Vegetable",
@@ -23,11 +23,11 @@
             "category": "Vegetable",
             "price": 3,
             "image-file": "carrot.jpg"
-        }, 
+        },
         {
             "name": "Watermelon",
             "category": "Fruit",
-            "price": 1.50,
+            "price": 1.5,
             "image-file": "watermelon.jpg"
         }
     ]

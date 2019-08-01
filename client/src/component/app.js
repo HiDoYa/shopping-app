@@ -1,7 +1,7 @@
-import React from 'react'
-import CartMenu from './cartmenu'
-import ItemsGrid from './itemsgrid'
-import SortMenu from './sortmenu'
+import React from "react";
+import CartMenu from "./cartmenu";
+import ItemsGrid from "./itemsgrid";
+import SortMenu from "./sortmenu";
 
 class App extends React.Component {
     constructor(props) {
@@ -10,8 +10,8 @@ class App extends React.Component {
             apiResponse: "",
             itemsAdded: [],
             categories: [],
-            filter: "All",
-        }
+            filter: "All"
+        };
     }
 
     addToCart(index) {
@@ -22,14 +22,13 @@ class App extends React.Component {
 
         // Checks if item already exists
         if (this.state.itemsAdded.includes(index)) {
-            // TODO Already exists popup
             return;
         }
 
-        let newState = this.state.itemsAdded.concat(index)
+        let newState = this.state.itemsAdded.concat(index);
 
         // Can't push state array -> concat instead
-        this.setState({itemsAdded: newState});
+        this.setState({ itemsAdded: newState });
     }
 
     removeFromCart(index) {
@@ -39,55 +38,58 @@ class App extends React.Component {
         }
         let newState = [...this.state.itemsAdded];
         let indexToRemove = newState.indexOf(index);
-        newState.splice(indexToRemove, 1)
+        newState.splice(indexToRemove, 1);
 
-        this.setState({itemsAdded: newState});
+        this.setState({ itemsAdded: newState });
     }
 
     // Set filter for one of the categories
     setFilter(categoryName) {
-        this.setState({filter: categoryName});
+        this.setState({ filter: categoryName });
     }
 
     componentDidMount() {
         // Calls API, gets response, converts to text, store as state
         // Note, json is passed into items to initialize them
         fetch("http://localhost:9000/")
-        .then(res => res.text())
-        .then(jsonString => {
-            let categoriesArr = [];
-            // Gets item categories for sortMenu
-            Array.from(JSON.parse(jsonString)["items"]).map((item) => {
-                let currentCategory = item["category"];
-                if (!categoriesArr.find((element) => element===currentCategory)) {
-                    categoriesArr.push(currentCategory);
-                }
-                return null;
+            .then(res => res.text())
+            .then(jsonString => {
+                let categoriesArr = [];
+                // Gets item categories for sortMenu
+                Array.from(JSON.parse(jsonString)["items"]).map(item => {
+                    let currentCategory = item["category"];
+                    if (!categoriesArr.find(element => element === currentCategory)) {
+                        categoriesArr.push(currentCategory);
+                    }
+                    return null;
+                });
+                this.setState({
+                    apiResponse: jsonString,
+                    categories: categoriesArr
+                });
             });
-            this.setState({ apiResponse: jsonString, categories: categoriesArr });
-        })
     }
 
     render() {
         return (
             <React.Fragment>
-                <CartMenu 
+                <CartMenu
                     apiResponse={this.state.apiResponse}
                     itemsAdded={this.state.itemsAdded}
-                    removeFromCart={(index) => this.removeFromCart(index)}
+                    removeFromCart={index => this.removeFromCart(index)}
                 />
                 <div className="container">
                     <h3 className="display-4 text-center pt-4 mb-4">HiDoYa's Market</h3>
                     <div className="row">
-                        <SortMenu 
+                        <SortMenu
                             categories={this.state.categories}
                             filter={this.state.filter}
-                            setFilter={(categoryName) => this.setFilter(categoryName)}
+                            setFilter={categoryName => this.setFilter(categoryName)}
                         />
-                        <ItemsGrid 
+                        <ItemsGrid
                             apiResponse={this.state.apiResponse}
                             filter={this.state.filter}
-                            addToCart={(index) => this.addToCart(index)}
+                            addToCart={index => this.addToCart(index)}
                         />
                     </div>
                 </div>

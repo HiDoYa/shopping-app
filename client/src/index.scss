@@ -1,4 +1,4 @@
-@import './themes/theme2';
+@import "./themes/theme2";
 
 #root {
     background-color: $background;
@@ -38,7 +38,7 @@
     transition: right 0.2s !important;
 }
 
-.highlight {
+.highlight:hover {
     border-style: solid;
     border-width: 2px;
     border-color: $item-border;

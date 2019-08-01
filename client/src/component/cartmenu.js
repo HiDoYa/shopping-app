@@ -14,10 +14,6 @@ class CartMenu extends React.Component {
         });
     }
 
-    calculatePrice() {
-        // TODO: Fix this
-    }
-
     render() {
         let classes = "shopping-cart cartmenu";
         if (this.state.showing) {

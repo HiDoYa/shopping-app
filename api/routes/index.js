@@ -1,10 +1,15 @@
 var express = require("express");
 var router = express.Router();
-var dirname = "/Users/hidoya/Code/shopping-app/api";
+var path = require("path");
 
-/* GET home page. */
-router.get("/", function(req, res, next) {
-    res.sendFile(dirname + "/dataSend.json");
+// Send json with all info
+router.get("/", (req, res, next) => {
+    res.sendFile(path.join(__dirname, "/../dataSend.json"));
+});
+
+// Send all images
+router.get("/images/:image", (req, res, next) => {
+    res.sendFile(path.join(__dirname + "/../images/", req.params.image));
 });
 
 module.exports = router;

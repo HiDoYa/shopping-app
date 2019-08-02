@@ -68,6 +68,7 @@ class App extends React.Component {
                     categories: categoriesArr
                 });
             });
+        fetch("http://localhost:9000/images");
     }
 
     render() {

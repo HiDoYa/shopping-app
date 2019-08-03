@@ -28,9 +28,9 @@ class CartMenu extends React.Component {
                         let dataJson = JSON.parse(this.props.apiResponse);
                         return (
                             <CartMenuElement
-                                name={dataJson["items"][itemIndex]["name"]}
-                                price={dataJson["items"][itemIndex]["price"]}
-                                category={dataJson["items"][itemIndex]["category"]}
+                                name={dataJson[itemIndex]["prod_name"]}
+                                price={dataJson[itemIndex]["price"]}
+                                category={dataJson[itemIndex]["category"]}
                                 key={itemIndex}
                                 index={itemIndex}
                                 removeFromCart={index => this.props.removeFromCart(index)}

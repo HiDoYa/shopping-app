@@ -8,7 +8,7 @@ class ItemsGrid extends React.Component {
         // If there was a response
         if (this.props.apiResponse !== "") {
             // Parse JSON
-            let dataJson = JSON.parse(this.props.apiResponse)["items"];
+            let dataJson = JSON.parse(this.props.apiResponse);
 
             // Only show elements based on filter
             dataJson = dataJson.filter(
@@ -27,7 +27,7 @@ class ItemsGrid extends React.Component {
                     if (dataJson[currentItem]) {
                         currentRow.push(
                             <Item
-                                name={dataJson[currentItem]["name"]}
+                                name={dataJson[currentItem]["prod_name"]}
                                 price={dataJson[currentItem]["price"].toFixed(2)}
                                 category={dataJson[currentItem]["category"]}
                                 key={currentItem}

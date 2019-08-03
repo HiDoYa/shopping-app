@@ -54,9 +54,10 @@ class App extends React.Component {
         fetch("http://localhost:9000/")
             .then(res => res.text())
             .then(jsonString => {
+                console.log(jsonString);
                 let categoriesArr = [];
                 // Gets item categories for sortMenu
-                Array.from(JSON.parse(jsonString)["items"]).map(item => {
+                Array.from(JSON.parse(jsonString)).map(item => {
                     let currentCategory = item["category"];
                     if (!categoriesArr.find(element => element === currentCategory)) {
                         categoriesArr.push(currentCategory);
@@ -68,7 +69,6 @@ class App extends React.Component {
                     categories: categoriesArr
                 });
             });
-        fetch("http://localhost:9000/images");
     }
 
     render() {

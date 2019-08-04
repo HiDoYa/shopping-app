@@ -52,7 +52,7 @@ class CartMenuBtn extends React.Component {
         }
         return (
             <button className={classes} onClick={() => this.props.onClick()}>
-                See cart
+                {this.props.showing ? "Hide cart" : "See cart"}
             </button>
         );
     }
@@ -95,7 +95,7 @@ class CartMenuElement extends React.Component {
                     <button className="btn btn-primary mt-3 mb-3" onClick={() => this.props.removeFromCart(this.props.index)}>
                         Remove
                     </button>
-                    <p>Cost: ${this.state.numberBuy * this.props.price}</p>
+                    <p>Cost: ${(this.state.numberBuy * this.props.price).toFixed(2)}</p>
                 </div>
             </div>
         );

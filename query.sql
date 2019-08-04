@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS product (
 );
 
 
-INSERT INTO product
+INSERT IGNORE INTO product
 VALUES 
 ('Banana', 2.15, 'Fruit', 'banana.jpg'),
 ('Broccoli', 3.5, 'Vegetable', 'broccoli.jpg'),

@@ -54,15 +54,13 @@ class App extends React.Component {
         fetch("http://localhost:9000/")
             .then(res => res.text())
             .then(jsonString => {
-                console.log(jsonString);
                 let categoriesArr = [];
                 // Gets item categories for sortMenu
-                Array.from(JSON.parse(jsonString)).map(item => {
+                Array.from(JSON.parse(jsonString)).forEach(item => {
                     let currentCategory = item["category"];
                     if (!categoriesArr.find(element => element === currentCategory)) {
                         categoriesArr.push(currentCategory);
                     }
-                    return null;
                 });
                 this.setState({
                     apiResponse: jsonString,

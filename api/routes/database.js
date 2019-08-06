@@ -18,7 +18,7 @@ connection.connect();
 router.get("/", (req, res, next) => {
     connection.query("SELECT * FROM product", function(err, rows, fields) {
         if (err) {
-            res.send(err);
+            res.status(404).send(err);
         }
         res.send(rows);
     });
@@ -26,7 +26,7 @@ router.get("/", (req, res, next) => {
 
 router.get("/:product", (req, res, next) => {
     if (err) {
-        res.send(err);
+        res.status(404).send(err);
     }
     connection.query(`SELECT * FROM product WHERE prod_name = "${req.params.product}"`, (err, rows, fields) => {
         res.send(rows);
@@ -35,7 +35,7 @@ router.get("/:product", (req, res, next) => {
 
 router.put("/:product", (req, res, next) => {
     if (req.body.price && req.body.price <= 0) {
-        res.send("Error: Product cannot be free or negative cost.");
+        res.status(404).send("Error: Product cannot be free or negative cost.");
         return;
     }
 
@@ -56,13 +56,13 @@ router.put("/:product", (req, res, next) => {
 
     // Check that params exist
     if (params === "") {
-        res.send("Invalid or nonexistent parameters");
+        res.status(404).send("Invalid or nonexistent parameters");
         return;
     }
 
     connection.query(`UPDATE product SET ${params} WHERE prod_name="${req.params.product}"`, (err, rows, fields) => {
         if (err) {
-            res.send(err);
+            res.status(404).send(err);
             return;
         }
 
@@ -74,7 +74,7 @@ router.put("/:product", (req, res, next) => {
 
 router.post("/", (req, res, next) => {
     if (!(req.body.prod_name || req.body.price || req.body.category || req.body.image_path)) {
-        res.send("All values need to be initialized.");
+        res.status(404).send("All values need to be initialized.");
         return;
     }
 
@@ -84,7 +84,7 @@ router.post("/", (req, res, next) => {
         }")`,
         (err, rows, fields) => {
             if (err) {
-                res.send(err);
+                res.status(404).send(err);
             }
 
             connection.query(`SELECT * FROM product WHERE prod_name = "${req.body.prod_name}"`, (err, rows, fields) => {
@@ -97,7 +97,7 @@ router.post("/", (req, res, next) => {
 router.delete("/:product", (req, res, next) => {
     connection.query(`DELETE FROM product WHERE prod_name="${req.params.product}"`, (err, rows, fields) => {
         if (err) {
-            res.send(err);
+            res.status(404).send(err);
             return;
         }
 

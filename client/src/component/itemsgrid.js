@@ -52,7 +52,7 @@ class Item extends React.Component {
         return (
             <div className="col-md-4 mt-2 mb-2 text-center highlight" onClick={() => this.props.addToCart(this.props.index)}>
                 <h3>{this.props.name}</h3>
-                <img className="mt-3 mb-3 item-image" src={"http://localhost:9000/images/" + this.props.image} alt="Item" />
+                <img className="mt-3 mb-3 item-image" src={"http://localhost:9000/api/images/" + this.props.image} alt="Item" />
                 <h5>Price: ${this.props.price}</h5>
                 <button className="btn btn-success mt-3 mb-3">Add to Cart</button>
             </div>

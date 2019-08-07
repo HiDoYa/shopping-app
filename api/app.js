@@ -19,8 +19,8 @@ app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: false, limit: "50mb" }));
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", indexRouter);
-app.use("/", databaseRouter);
+app.use("/api", indexRouter);
+app.use("/api", databaseRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

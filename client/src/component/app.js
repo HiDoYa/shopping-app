@@ -51,7 +51,7 @@ class App extends React.Component {
     componentDidMount() {
         // Calls API, gets response, converts to text, store as state
         // Note, json is passed into items to initialize them
-        fetch("http://localhost:9000/")
+        fetch("http://localhost:9000/api")
             .then(res => res.text())
             .then(jsonString => {
                 let categoriesArr = [];

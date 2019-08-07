@@ -9,13 +9,15 @@ const upload = multer({
 });
 
 router.post("/", upload.array("file"), (req, res, next) => {
+    let itemsProcessed = 0;
     req.files.forEach(file => {
         const oldPath = path.join(__dirname, `../${file.path}`);
         const newPath = path.join(__dirname, `../images/${file.originalname}`);
         fs.rename(oldPath, newPath, err => {
-            console.log(oldPath, newPath);
-            if (err) res.send(err);
-            res.send("SUCCESS");
+            itemsProcessed++;
+            if (itemsProcessed === req.files.length) {
+                res.send("SUCCESS");
+            }
         });
     });
 });
